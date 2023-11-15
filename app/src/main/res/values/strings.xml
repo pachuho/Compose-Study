@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Compose Study</string>
+    <string name="show_less"></string>
+    <string name="show_more">Show more</string>
 </resources>
