@@ -4,10 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,30 +26,40 @@ import com.pachuho.composestudy.ui.theme.ComposeStudyTheme
 
 class Quadrant {
     @Composable
-    fun composeQuadrant(modifier: Modifier) {
-        Surface {
-            Column {
-                Row(modifier = Modifier.weight(1f)) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        composeCard(modifier, Color1, R.string.quardrant_text_1_main, R.string.quardrant_text_1_sub)
-                    }
+    fun composeQuadrant() {
+        Column(Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier.weight(1f)) {
+                composeCard(
+                    Modifier.weight(1f),
+                    Color1,
+                    stringResource(id = R.string.quardrant_text_1_main),
+                    stringResource(id = R.string.quardrant_text_1_sub)
+                )
 
-                    Column(modifier = Modifier.weight(1f)) {
-                        composeCard(modifier, Color2, R.string.quardrant_text_2_main, R.string.quardrant_text_2_sub)
-                    }
-                }
 
-                Row(modifier = Modifier.weight(1f)) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        composeCard(modifier, Color3, R.string.quardrant_text_3_main, R.string.quardrant_text_3_sub)
-                    }
-
-                    Column(modifier = Modifier.weight(1f)) {
-                        composeCard(modifier, Color4, R.string.quardrant_text_4_main, R.string.quardrant_text_4_sub)
-                    }
-                }
+                composeCard(
+                    Modifier.weight(1f),
+                    Color2,
+                    stringResource(id = R.string.quardrant_text_2_main),
+                    stringResource(id = R.string.quardrant_text_2_sub)
+                )
             }
 
+            Row(modifier = Modifier.weight(1f)) {
+                composeCard(
+                    Modifier.weight(1f),
+                    Color3,
+                    stringResource(id = R.string.quardrant_text_3_main),
+                    stringResource(id = R.string.quardrant_text_3_sub)
+                )
+
+                composeCard(
+                    Modifier.weight(1f),
+                    Color4,
+                    stringResource(id = R.string.quardrant_text_4_main),
+                    stringResource(id = R.string.quardrant_text_4_sub)
+                )
+            }
         }
     }
 
@@ -58,47 +67,35 @@ class Quadrant {
     fun composeCard(
         modifier: Modifier,
         color: Color,
-        textMain: Int,
-        textSub: Int
+        title: String,
+        description: String
     ) {
         Column(
-            modifier = modifier.fillMaxHeight().background(color),
+            modifier = modifier
+                .fillMaxSize()
+                .background(color)
+                .padding(16.dp),
             verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                Modifier.padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                composeTextMain(textMain)
-                composeTextSub(textSub)
-            }
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            Text(
+                text = description,
+                textAlign = TextAlign.Justify
+            )
         }
 
     }
 
     @Composable
-    fun composeTextMain(text: Int) {
-        Text(
-            text = stringResource(id = text),
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-    }
-
-    @Composable
-    fun composeTextSub(text: Int) {
-        Text(
-            text = stringResource(id = text),
-            textAlign = TextAlign.Justify
-        )
-    }
-
-
-    @Composable
     @Preview(showBackground = true, widthDp = 400, heightDp = 800)
     fun ComposeQuadrantPreView() {
         ComposeStudyTheme {
-            composeQuadrant(modifier = Modifier.fillMaxSize())
+            composeQuadrant()
         }
     }
 
